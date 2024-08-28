@@ -14,7 +14,7 @@ export const getAllWeapons = async (type: string) => {
   return { response, error };
 };
 
-export const getSpecificWeapon = async (id: number | string) => {
+export const getSpecificWeapon = async (id: string | undefined) => {
   let response, error;
 
   try {

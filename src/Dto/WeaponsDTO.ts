@@ -32,8 +32,8 @@ export type Crafting = {
   craftable: boolean;
   previous: number;
   branches: number[];
-  craftingMaterials?: CraftingMaterial[];
-  upgradeMaterials?: UpgradeMaterial[];
+  craftingMaterials: CraftingMaterial[];
+  upgradeMaterials: UpgradeMaterial[];
 };
 
 export type CraftingMaterial = {
