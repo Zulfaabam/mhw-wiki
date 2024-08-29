@@ -2,8 +2,8 @@ import Select from "../components/Select";
 import { weaponTypeOptions } from "../common/consts";
 import { useContext, useEffect } from "react";
 import { WeaponsContext } from "../context/WeaponsContext";
-import Spinner from "../components/Spinner";
 import WeaponCard from "../components/WeaponCard";
+import CardSkeleton from "../components/Skeleton/CardSkeleton";
 
 const WeaponsList = () => {
   const weaponsContext = useContext(WeaponsContext);
@@ -18,8 +18,10 @@ const WeaponsList = () => {
 
   return (
     <div className="flex justify-center items-center flex-col gap-4">
-      <div className="flex justify-between w-full px-[88px]">
-        <p className="text-3xl font-bold text-white">Weapons List</p>
+      <div className="flex flex-col md:flex-row gap-3 justify-between w-full md:px-[88px]">
+        <p className="text-2xl md:text-3xl font-bold text-white text-center">
+          Weapons List
+        </p>
         <div className="flex gap-4 justify-center items-center">
           <Select
             options={weaponTypeOptions}
@@ -33,9 +35,13 @@ const WeaponsList = () => {
           />
         </div>
       </div>
-      <div className="remove-scrollbar flex gap-2 flex-wrap justify-center max-h-[745px] overflow-y-scroll">
+      <div className="remove-scrollbar flex gap-2 flex-wrap justify-center overflow-y-scroll weapon-list-container pb-6">
         {isLoading ? (
-          <Spinner />
+          <>
+            <CardSkeleton />
+            <CardSkeleton />
+            <CardSkeleton />
+          </>
         ) : (
           weapons?.map((weapon) => (
             <WeaponCard key={weapon?.id} weapon={weapon} />

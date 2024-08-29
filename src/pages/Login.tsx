@@ -35,17 +35,17 @@ function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen w-full bg-elder-recess">
-      <div className="flex justify-center items-center flex-col text-white w-2/3">
-        <img src={mhwLogo} alt="MHW logo" className="logo h-[20rem]" />
+    <div className="flex flex-col lg:flex-row justify-center items-center h-screen w-full bg-elder-recess p-4">
+      <div className="flex justify-center items-center flex-col text-white md:w-2/3 w-full mb-4 md:mb-0">
+        <img src={mhwLogo} alt="MHW logo" className="logo h-48 lg:h-80" />
       </div>
-      <div className="border h-full bg-white w-1/3 flex flex-col justify-center items-center gap-3">
-        <div className="text-center mb-2">
-          <p className="text-3xl font-bold">Welcome to</p>
-          <p className="text-3xl font-bold">Monster Hunter World</p>
-          <p className="text-3xl font-bold">Wiki</p>
+      <div className="border bg-white md:w-1/3 md:h-full w-full p-8 rounded-lg flex flex-col justify-center items-center gap-3 shadow-lg">
+        <div className="text-center mb-4">
+          <p className="text-2xl md:text-3xl font-bold">Welcome to</p>
+          <p className="text-2xl md:text-3xl font-bold">Monster Hunter World</p>
+          <p className="text-2xl md:text-3xl font-bold">Wiki</p>
         </div>
-        <div className="w-60">
+        <div className="w-full max-w-xs">
           <InputField
             required
             id="username"
@@ -56,7 +56,7 @@ function Login() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div className="w-60">
+        <div className="w-full max-w-xs">
           <InputField
             required
             name="password"
@@ -69,7 +69,7 @@ function Login() {
         </div>
         <button
           type="submit"
-          className="text-white w-60 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none"
+          className="text-white w-full max-w-xs bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none"
           onClick={handleLogin}
         >
           Login
