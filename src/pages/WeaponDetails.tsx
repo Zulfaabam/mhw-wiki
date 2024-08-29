@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MainLayout from "../components/MainLayout";
 import { useParams } from "react-router-dom";
 import { getSpecificWeapon } from "../services/WeaponService";
 import { WeaponsDTO } from "../Dto/WeaponsDTO";
-import DetailsSkeleton from "../components/Skeleton/DetailsSkeleton";
-import CardSkeleton from "../components/Skeleton/CardSkeleton";
+import CardSkeleton from "../components/CardSkeleton";
 
 const WeaponDetails = () => {
   const { weaponId } = useParams();
 
   const [weapon, setWeapon] = useState<WeaponsDTO | null>(null);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     getSpecificWeapon(weaponId)
       .then((res) => {
+        if (res.response?.status !== 200) {
+          setError(res.response?.title);
+        }
         setWeapon(res.response);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => setError(err));
   }, [weaponId]);
 
   if (!weapon) {
@@ -24,6 +27,19 @@ const WeaponDetails = () => {
       <MainLayout>
         <div className="w-full flex justify-center">
           <CardSkeleton />
+        </div>
+      </MainLayout>
+    );
+  }
+
+  if (error) {
+    return (
+      <MainLayout>
+        <div className="w-full flex flex-col gap-2 justify-center items-center">
+          <p className="text-3xl text-red-600">{error}</p>
+          <a href="/weapons" className="text-white underline">
+            Back to Weapons
+          </a>
         </div>
       </MainLayout>
     );
@@ -49,7 +65,7 @@ const WeaponDetails = () => {
           <div className="flex w-full lg:w-auto flex-col md:flex-row justify-between md:justify-center gap-4 mb-2">
             <div className="w-full md:w-60 md:text-right text-center">
               <p className="text-orange-400">Rarity {weapon.rarity}</p>
-              <p className="text-red-400">Attack {weapon.attack.display}</p>
+              <p className="text-red-400">Attack {weapon.attack?.display}</p>
               <p className="text-slate-200 capitalize">
                 {weapon.elements[0]?.type} {weapon.elements[0]?.damage}{" "}
                 {weapon.elements[0]?.hidden && "(Hidden)"}

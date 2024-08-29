@@ -1,5 +1,5 @@
 import mhwLogo from "/MHW-logo.svg";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import InputField from "../components/InputField";
 import { login } from "../services/AuthService";
 import Cookies from "universal-cookie";
@@ -26,13 +26,21 @@ function Login() {
           cookies.set("auth-token", res.data?.refreshToken);
           setMessage("Success!");
           userContext?.fetchUser(res.data?.refreshToken);
-          navigate("/");
+          navigate("/weapons");
         } else {
           setMessage("Login Failed!");
         }
       })
       .catch((error) => setMessage(error));
   };
+
+  useEffect(() => {
+    const loggedUserToken = cookies.get("auth-token");
+
+    if (loggedUserToken) {
+      navigate("/weapons");
+    }
+  }, [navigate]);
 
   return (
     <div className="flex flex-col lg:flex-row justify-center items-center h-screen w-full bg-elder-recess p-4">

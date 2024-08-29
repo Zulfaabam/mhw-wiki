@@ -41,6 +41,15 @@ export const WeaponsProvider = ({ children }: ContextProvider) => {
 
     getAllWeapons(weaponType)
       .then((res) => {
+        if (res.response?.status !== 200) {
+          setState((prev) => ({
+            ...prev,
+            isWeaponsLoading: false,
+            allWeapons: [],
+            error: res.response?.title,
+          }));
+        }
+
         setState((prev) => ({
           ...prev,
           isWeaponsLoading: false,
