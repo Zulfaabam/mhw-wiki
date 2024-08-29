@@ -1,42 +1,21 @@
-import { InputLabel, TextField, TextFieldProps } from "@mui/material";
+import { InputHTMLAttributes } from "react";
 
-const InputField = ({ value, onChange, ...props }: TextFieldProps) => {
+export interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+}
+
+const InputField = ({ label, value, onChange, ...props }: InputFieldProps) => {
   return (
-    <div className="space-y-1">
-      <InputLabel
-        htmlFor={props.name}
-        className="capitalize"
-        sx={{
-          "&.MuiInputLabel-root": {
-            color: "white",
-            margin: 0,
-          },
-        }}
-      >
-        {props.name}
-      </InputLabel>
-      <TextField
-        fullWidth
+    <div>
+      <label htmlFor="first_name" className="block mb-2 text-sm font-medium">
+        {label}
+      </label>
+      <input
+        type="text"
+        id="first_name"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         value={value}
         onChange={onChange}
-        variant="outlined"
-        sx={{
-          "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-              borderColor: "transparent",
-            },
-            "&:hover fieldset": {
-              borderColor: "#ccc",
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: "#333",
-            },
-          },
-          "& .MuiInputBase-input": {
-            backgroundColor: "#f9f9f9",
-            borderRadius: "5px",
-          },
-        }}
         {...props}
       />
     </div>

@@ -13,7 +13,6 @@ const WeaponDetails = () => {
   useEffect(() => {
     getSpecificWeapon(weaponId)
       .then((res) => {
-        console.log(res.response);
         setWeapon(res.response);
       })
       .catch((err) => console.error(err));

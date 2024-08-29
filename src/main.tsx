@@ -4,15 +4,9 @@ import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login.tsx";
-import { createTheme, ThemeProvider } from "@mui/material";
 import WeaponDetails from "./pages/WeaponDetails.tsx";
 import { WeaponsProvider } from "./context/WeaponsContext.tsx";
-
-const theme = createTheme({
-  typography: {
-    fontFamily: ['"Zen Old Mincho"', "system-ui"].join(","),
-  },
-});
+import { AuthProvider } from "./context/AuthContext.tsx";
 
 const router = createBrowserRouter([
   {
@@ -35,8 +29,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
+    <AuthProvider>
       <RouterProvider router={router} />
-    </ThemeProvider>
+    </AuthProvider>
   </StrictMode>
 );

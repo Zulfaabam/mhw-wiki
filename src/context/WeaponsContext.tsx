@@ -11,7 +11,7 @@ export interface WeaponsState {
   isDetailsLoading: boolean;
 }
 
-export interface WeaponsContextProvider {
+export interface ContextProvider {
   children: React.ReactNode;
 }
 
@@ -30,7 +30,7 @@ export const WeaponsContext = createContext<{
   fetchWeapons: (weaponType: string) => void;
 } | null>(null);
 
-export const WeaponsProvider = ({ children }: WeaponsContextProvider) => {
+export const WeaponsProvider = ({ children }: ContextProvider) => {
   const [state, setState] = useState<WeaponsState>(initialState);
 
   function fetchWeapons(weaponType: string) {
